@@ -74,32 +74,32 @@ Asegurar la calidad del sistema mediante tests End-to-End que validen flujos cr�
   - [x] `cypress/fixtures/interviewFlow.json` (mock de GET /positions/1/interviewFlow)
   - [x] `cypress/fixtures/candidates.json` (mock de GET /positions/1/candidates)
 
-- [ ] 🔧 **Escritura de Tests** (TAREA ACTIVA)
-  - [ ] **Spec 1: Navigation**
-    - [ ] Test: Navegar desde Dashboard → Positions → Position Details
-  - [ ] **Spec 2: Kanban Board Loading**
-    - [ ] Test: Cargar tablero y verificar columnas (InterviewSteps)
-    - [ ] Test: Verificar candidatos en columnas correctas
-  - [ ] **Spec 3: Drag & Drop**
-    - [ ] Test: Mover candidato de "Initial Screening" a "Technical Interview"
-    - [ ] Test: Verificar llamada PUT al backend con nuevo `currentInterviewStep`
-    - [ ] Test: Validar persistencia (recargar página y verificar nueva posición)
-  - [ ] **Spec 4: Candidate Details**
-    - [ ] Test: Hacer clic en tarjeta de candidato
-    - [ ] Test: Verificar apertura de Offcanvas con detalles
-    - [ ] Test: Cerrar panel lateral
+- [x] ✅ **Escritura de Tests** (COMPLETADO 2026-01-19)
+  - [x] **Spec Principal: `position_spec.cy.js`** - 8 Tests Implementados:
+    - [x] Test 1: Renderizado de columnas del flujo de entrevistas
+    - [x] Test 2: Renderizado de candidatos en columnas correctas
+    - [x] Test 3: Visualización de ratings (círculos verdes)
+    - [x] Test 4: Drag & Drop entre columnas + verificación de llamada PUT
+    - [x] Test 5: Reordenamiento dentro de la misma columna
+    - [x] Test 6: Navegación - botón "Volver a Posiciones"
+    - [x] Test 7: Manejo de errores de API (500)
+    - [x] Test 8: Cancelación de drag (soltar fuera de zona válida)
+  - **Estrategia:** Hybrid Mocking con `cy.intercept()` para fixtures
+  - **Selectores:** Usando `data-rbd-draggable-id` y `data-rbd-droppable-id` de react-beautiful-dnd
 
-- [ ] **Refactorización para Testing**
+- [ ] **Refactorización para Testing** (Opcional - Mejora Futura)
   - [ ] Añadir `data-testid` a componentes:
     - [ ] `PositionDetails.js` → columnas Kanban
     - [ ] `CandidateCard.js` → tarjetas de candidatos
     - [ ] `CandidateDetails.js` → panel lateral
   - [ ] Extraer URLs de API a constantes (ej: `API_BASE_URL`)
 
-- [ ] **Ejecución y Validación**
+- [ ] 🔧 **Ejecución y Validación** (TAREA ACTIVA)
   - [ ] Ejecutar tests en modo interactivo: `npx cypress open`
   - [ ] Ejecutar tests headless: `npx cypress run`
-  - [ ] Validar cobertura: Al menos 5 tests críticos pasando
+  - [ ] Validar que todos los 8 tests pasan correctamente
+  - [ ] Ajustar selectores si es necesario
+  - [ ] Documentar resultados en walkthrough.md
 
 ---
 

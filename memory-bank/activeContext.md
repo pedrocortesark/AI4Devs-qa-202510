@@ -77,25 +77,35 @@
    - Creado `cypress/support/commands.js` con comando custom `dragCandidateToStage`
    - Scripts añadidos a `package.json`: `cy:open`, `cy:run`
 
-5. [x] ✅ **TAREA ACTIVA:** Crear fixtures para mock de respuestas API
-   - [x] `cypress/fixtures/interviewFlow.json`
-   - [x] `cypress/fixtures/candidates.json`
+5. [x] ✅ Crear fixtures para mock de respuestas API (COMPLETADO 2026-01-19)
+   - [x] `cypress/fixtures/interviewFlow.json` - Flujo con 3 etapas (Entrevista Inicial, Prueba Técnica, Oferta)
+   - [x] `cypress/fixtures/candidates.json` - 3 candidatos distribuidos en las etapas
 
-6. [ ] 🔧 **TAREA ACTIVA:** Escribir spec principal: `cypress/e2e/position_spec.cy.js`
-   - Test 1: Cargar tablero Kanban
-   - Test 2: Mover candidato entre columnas
-   - Test 3: Verificar llamada PUT al backend
-   - Test 4: Abrir panel lateral al clic en tarjeta
+6. [x] ✅ Escribir spec principal: `cypress/e2e/position_spec.cy.js` (COMPLETADO 2026-01-19)
+   - **8 Tests Implementados:**
+     - Test 1: Renderizado de columnas del flujo de entrevistas
+     - Test 2: Renderizado de candidatos en columnas correctas
+     - Test 3: Visualización de ratings (círculos verdes)
+     - Test 4: Drag & Drop entre columnas + verificación de llamada PUT
+     - Test 5: Reordenamiento dentro de la misma columna
+     - Test 6: Navegación - botón "Volver a Posiciones"
+     - Test 7: Manejo de errores de API (500)
+     - Test 8: Cancelación de drag (soltar fuera de zona válida)
+   - **Estrategia:** Hybrid Mocking con `cy.intercept()` para fixtures
+   - **Selectores:** Usando `data-rbd-draggable-id` y `data-rbd-droppable-id` de react-beautiful-dnd
 
-7. [ ] Añadir `data-testid` attributes a componentes:
+7. [ ] 🔧 **TAREA ACTIVA:** Ejecutar tests y validar resultados
+   - Verificar que todos los tests pasan en modo gráfico (`npx cypress open`)
+   - Ejecutar en modo headless y revisar reportes
+   - Ajustar selectores si es necesario basándose en resultados
+
+8. [ ] Añadir `data-testid` attributes a componentes (Opcional - Mejora Futura):
    - `PositionDetails.js`: `data-testid="stage-column-{index}"`
    - `CandidateCard.js`: `data-testid="candidate-card-{id}"`
    - `CandidateDetails.js`: `data-testid="candidate-details-panel"`
+   - **Nota:** Los tests actuales usan selectores nativos de react-beautiful-dnd, por lo que esto es opcional
 
-8. [ ] Ejecutar tests y validar cobertura
-   ```bash
-   npx cypress run --spec "cypress/e2e/position_spec.cy.js"
-   ```
+9. [ ] Documentar resultados en walkthrough.md
 
 ---
 
