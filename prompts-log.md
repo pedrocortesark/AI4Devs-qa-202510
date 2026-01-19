@@ -195,3 +195,48 @@ Antes de confirmar, verifica que los keys del JSON (ej: `fullName` vs `name`, `i
 **Resumen de la Respuesta/Acción:**
 Analizado código frontend `PositionDetails.js` para inferir estructura de datos. Creados `interviewFlow.json` y `candidates.json` con datos mock coherentes con la lógica de filtrado del frontend (usando Nombres de steps en lugar de IDs para la propiedad `currentInterviewStep` como espera el frontend). Documentación actualizada.
 ---
+
+## 004 - Verificación de Entorno (Smoke Test)
+**Fecha:** 2026-01-19
+**Prompt Original:**
+# Tarea: Verificación de Entorno (Smoke Test)
+
+Actúa como QA Lead. Antes de escribir los tests complejos, necesito verificar que la instalación y configuración de Cypress son correctas.
+
+**OBJETIVO:**
+Crear y ejecutar una prueba de conexión básica ("Sanity Check") para confirmar que Cypress puede levantar el navegador y cargar el proyecto correctamente.
+
+**PASOS A EJECUTAR:**
+
+1.  **Asegurar que el servidor Frontend está corriendo:**
+    - Verifica si el puerto 3000 está activo. Si no, indícame que debo iniciar el proyecto frontend en una terminal aparte (`npm start`).
+
+2.  **Crear un Test de Verificación (`frontend/cypress/e2e/sanity.cy.js`):**
+    - Crea este archivo con un test muy simple:
+      ```javascript
+      describe('Verificación de Entorno', () => {
+        it('Carga la página de inicio correctamente', () => {
+          cy.visit('/'); // Esto verifica que baseUrl está bien configurada
+          cy.get('body').should('be.visible'); // Verifica que el DOM carga
+        });
+        
+        it('Puede leer los fixtures creados', () => {
+          cy.fixture('interviewFlow').then((data) => {
+            expect(data).to.not.be.undefined;
+          });
+          cy.fixture('candidates').then((data) => {
+             expect(data).to.not.be.undefined;
+          });
+        });
+      });
+      ```
+
+3.  **Instrucciones de Ejecución:**
+    - Dame el comando exacto para abrir Cypress en modo gráfico (`npx cypress open`) desde la carpeta correcta.
+    - Explícame qué debo ver en la pantalla para considerar que la prueba ha sido exitosa.
+
+**NOTA:** No actualices el Memory Bank todavía. Este es un paso de verificación intermedio. Sin embargo, sí que quiero que incluyas este prompt en el registro siguiendo el protocolo AGENTSmd
+
+**Resumen de la Respuesta/Acción:**
+Verificado que el servidor frontend no está corriendo en el puerto 3000. Creado archivo de test de verificación `frontend/cypress/e2e/sanity.cy.js` con dos tests: uno para verificar la carga de la página y otro para verificar el acceso a los fixtures. Documentación actualizada en `prompts-log.md`.
+---
