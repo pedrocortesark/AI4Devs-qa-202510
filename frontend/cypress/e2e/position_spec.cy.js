@@ -178,4 +178,107 @@ describe('Kanban Board - Position Details', () => {
                 cy.contains('Carlos García').should('exist');
             });
     });
+
+    // TEST 9: Candidate Details Panel - Abrir y verificar detalles del candidato
+    it('Abre el panel de detalles al hacer clic en un candidato', () => {
+        // A. Interceptamos la llamada de detalles del candidato
+        cy.intercept('GET', '**/candidates/101', {
+            statusCode: 200,
+            body: {
+                id: 101,
+                firstName: 'Carlos',
+                lastName: 'García',
+                email: 'carlos.garcia@example.com',
+                phone: '+34 600 123 456',
+                address: 'Madrid, España',
+                educations: [
+                    {
+                        id: 1,
+                        institution: 'Universidad Politécnica de Madrid',
+                        title: 'Ingeniería Informática',
+                        startDate: '2015-09-01',
+                        endDate: '2019-06-30'
+                    }
+                ],
+                workExperiences: [
+                    {
+                        id: 1,
+                        company: 'Tech Solutions S.L.',
+                        position: 'Desarrollador Full Stack',
+                        description: 'Desarrollo de aplicaciones web con React y Node.js',
+                        startDate: '2019-07-01',
+                        endDate: '2023-12-31'
+                    }
+                ],
+                resumes: [],
+                applications: [
+                    {
+                        id: 1,
+                        position: { title: 'Desarrollador Fullstack' },
+                        applicationDate: '2024-01-15',
+                        interviews: []
+                    }
+                ]
+            }
+        }).as('getCandidateDetails');
+
+        // B. Hacemos clic en la tarjeta del candidato usando data-testid
+        cy.get('[data-testid="candidate-card-101"]').click();
+
+        // C. Esperamos la llamada a la API
+        cy.wait('@getCandidateDetails');
+
+        // D. Verificamos que el panel lateral se abre
+        cy.get('[data-testid="candidate-details-panel"]').should('be.visible');
+
+        // E. Verificamos que muestra la información correcta del candidato
+        cy.get('[data-testid="candidate-details-panel"]').within(() => {
+            // Verificar nombre completo
+            cy.contains('Carlos García').should('be.visible');
+
+            // Verificar email
+            cy.contains('carlos.garcia@example.com').should('be.visible');
+
+            // Verificar teléfono
+            cy.contains('+34 600 123 456').should('be.visible');
+
+            // Verificar dirección
+            cy.contains('Madrid, España').should('be.visible');
+
+            // Verificar educación
+            cy.contains('Universidad Politécnica de Madrid').should('be.visible');
+            cy.contains('Ingeniería Informática').should('be.visible');
+
+            // Verificar experiencia laboral
+            cy.contains('Tech Solutions S.L.').should('be.visible');
+            cy.contains('Desarrollador Full Stack').should('be.visible');
+        });
+
+        // F. Cerramos el panel usando el botón de cerrar
+        cy.get('[data-testid="candidate-details-panel"]').within(() => {
+            cy.get('.btn-close').click();
+        });
+
+        // G. Verificamos que el panel se cierra
+        cy.get('[data-testid="candidate-details-panel"]').should('not.be.visible');
+    });
+
+    // TEST 10: Usar data-testid para seleccionar columnas Kanban
+    it('Usa data-testid para identificar columnas del tablero Kanban', () => {
+        // Verificamos que las columnas tienen los data-testid correctos
+        cy.get('[data-testid="kanban-column-1"]').should('exist').and('contain', 'Entrevista Inicial');
+        cy.get('[data-testid="kanban-column-2"]').should('exist').and('contain', 'Prueba Técnica');
+        cy.get('[data-testid="kanban-column-3"]').should('exist').and('contain', 'Oferta');
+    });
+
+    // TEST 11: Usar data-testid para seleccionar tarjetas de candidatos
+    it('Usa data-testid para identificar tarjetas de candidatos', () => {
+        // Verificamos que las tarjetas tienen los data-testid correctos
+        cy.get('[data-testid="candidate-card-101"]').should('exist').and('contain', 'Carlos García');
+        cy.get('[data-testid="candidate-card-102"]').should('exist').and('contain', 'Ana López');
+        cy.get('[data-testid="candidate-card-103"]').should('exist').and('contain', 'Beatriz Méndez');
+
+        // Verificamos que podemos contar el total de candidatos
+        cy.get('[data-testid^="candidate-card-"]').should('have.length', 3);
+    });
 });

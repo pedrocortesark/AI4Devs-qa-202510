@@ -75,7 +75,7 @@ Asegurar la calidad del sistema mediante tests End-to-End que validen flujos cr�
   - [x] `cypress/fixtures/candidates.json` (mock de GET /positions/1/candidates)
 
 - [x] ✅ **Escritura de Tests** (COMPLETADO 2026-01-19)
-  - [x] **Spec Principal: `position_spec.cy.js`** - 8 Tests Implementados:
+  - [x] **Spec Principal: `position_spec.cy.js`** - 11 Tests Implementados:
     - [x] Test 1: Renderizado de columnas del flujo de entrevistas
     - [x] Test 2: Renderizado de candidatos en columnas correctas
     - [x] Test 3: Visualización de ratings (círculos verdes)
@@ -84,20 +84,24 @@ Asegurar la calidad del sistema mediante tests End-to-End que validen flujos cr�
     - [x] Test 6: Navegación - botón "Volver a Posiciones"
     - [x] Test 7: Manejo de errores de API (500)
     - [x] Test 8: Cancelación de drag (soltar fuera de zona válida)
+    - [x] Test 9: Panel de detalles de candidato (apertura, visualización, cierre)
+    - [x] Test 10: Verificación de data-testid en columnas Kanban
+    - [x] Test 11: Verificación de data-testid en tarjetas de candidatos
   - **Estrategia:** Hybrid Mocking con `cy.intercept()` para fixtures
-  - **Selectores:** Usando `data-rbd-draggable-id` y `data-rbd-droppable-id` de react-beautiful-dnd
+  - **Selectores:** Usando `data-rbd-draggable-id`, `data-rbd-droppable-id` y `data-testid` personalizados
 
-- [ ] **Refactorización para Testing** (Opcional - Mejora Futura)
-  - [ ] Añadir `data-testid` a componentes:
-    - [ ] `PositionDetails.js` → columnas Kanban
-    - [ ] `CandidateCard.js` → tarjetas de candidatos
-    - [ ] `CandidateDetails.js` → panel lateral
-  - [ ] Extraer URLs de API a constantes (ej: `API_BASE_URL`)
+- [x] ✅ **Refactorización para Testing** (COMPLETADO 2026-01-19)
+  - [x] Añadir `data-testid` a componentes:
+    - [x] `StageColumn.js` → `data-testid="kanban-column-{stage.id}"`
+    - [x] `CandidateCard.js` → `data-testid="candidate-card-{candidate.id}"`
+    - [x] `CandidateDetails.js` → `data-testid="candidate-details-panel"`
+  - **Resultado:** Selectores robustos que no dependen de clases CSS
+  - **Compatibilidad:** No interfiere con react-beautiful-dnd
 
 - [ ] 🔧 **Ejecución y Validación** (TAREA ACTIVA)
   - [ ] Ejecutar tests en modo interactivo: `npx cypress open`
   - [ ] Ejecutar tests headless: `npx cypress run`
-  - [ ] Validar que todos los 8 tests pasan correctamente
+  - [ ] Validar que todos los 11 tests pasan correctamente
   - [ ] Ajustar selectores si es necesario
   - [ ] Documentar resultados en walkthrough.md
 

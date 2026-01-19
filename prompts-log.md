@@ -240,3 +240,46 @@ Crear y ejecutar una prueba de conexión básica ("Sanity Check") para confirmar
 **Resumen de la Respuesta/Acción:**
 Verificado que el servidor frontend no está corriendo en el puerto 3000. Creado archivo de test de verificación `frontend/cypress/e2e/sanity.cy.js` con dos tests: uno para verificar la carga de la página y otro para verificar el acceso a los fixtures. Documentación actualizada en `prompts-log.md`.
 ---
+
+## 005 - Implementación de Tests E2E para Tablero Kanban
+**Fecha:** 2026-01-19
+**Prompt Original:**
+# Tarea: Implementación de Tests E2E para Tablero Kanban
+
+Actúa como QA Lead y Developer. El entorno está verificado y los fixtures listos. Ahora vamos a escribir el test principal.
+
+**OBJETIVO:**
+Crear el archivo `frontend/cypress/e2e/position_spec.cy.js` para probar la interfaz de "Position Details".
+
+**ESTRATEGIA DE TESTING (Hybrid Mocking):**
+Para evitar depender de la base de datos real (que puede cambiar), usaremos `cy.intercept` para cargar nuestros fixtures al entrar en la página. Así controlamos exactamente qué columnas y candidatos aparecen.
+
+**PASOS A EJECUTAR:**
+1. Crear `frontend/cypress/e2e/position_spec.cy.js` con tests comprehensivos
+2. Refinamiento de Selectores usando `data-rbd-draggable-id` y `data-rbd-droppable-id`
+3. Actualización de Memoria en activeContext.md y progress.md
+
+**Resumen de la Respuesta/Acción:**
+Analizado código frontend (`PositionDetails.js`, `StageColumn.js`, `CandidateCard.js`) y fixtures para entender estructura de datos y selectores. Creado `frontend/cypress/e2e/position_spec.cy.js` con 8 tests comprehensivos: (1) Renderizado de columnas, (2) Renderizado de candidatos en columnas correctas, (3) Visualización de ratings, (4) Drag & Drop con verificación de API PUT, (5) Reordenamiento en misma columna, (6) Navegación, (7) Manejo de errores API, (8) Cancelación de drag. Implementada estrategia de Hybrid Mocking con `cy.intercept()`. Actualizados `activeContext.md` y `progress.md` siguiendo protocolo AGENTS.md.
+---
+
+## 006 - Refactorización (Data-TestID) y Test de Detalles de Candidato
+**Fecha:** 2026-01-19
+**Prompt Original:**
+# Tarea: Refactorización (Data-TestID) y Test de Detalles de Candidato
+
+Actúa como Desarrollador Frontend y QA Lead. Vamos a endurecer nuestros tests y completar la cobertura funcional.
+
+**OBJETIVO:**
+1. Modificar los componentes de React para incluir atributos `data-testid`.
+2. Actualizar el test `position_spec.cy.js` para usar estos selectores robustos.
+3. Añadir el escenario de prueba para "Ver Detalles del Candidato" (Panel lateral/Offcanvas).
+
+**PASOS EJECUTADOS:**
+1. Instrumentación del Código Fuente - Añadidos data-testid a CandidateCard, StageColumn y CandidateDetails
+2. Actualización del Test - Añadidos 3 nuevos tests (9, 10, 11)
+3. Actualización de Memoria - Actualizados activeContext.md y progress.md
+
+**Resumen de la Respuesta/Acción:**
+Añadidos atributos `data-testid` a los tres componentes principales: `CandidateCard.js` (`data-testid="candidate-card-{id}"`), `StageColumn.js` (`data-testid="kanban-column-{stage.id}"`), y `CandidateDetails.js` (`data-testid="candidate-details-panel"`). Actualizados sin romper la funcionalidad de react-beautiful-dnd. Creados 3 nuevos tests en `position_spec.cy.js`: Test 9 (panel de detalles con mock de API GET), Test 10 (verificación de data-testid en columnas), Test 11 (verificación de data-testid en tarjetas). Total de tests: 11. Actualizados `activeContext.md` y `progress.md` siguiendo protocolo AGENTS.md.
+---

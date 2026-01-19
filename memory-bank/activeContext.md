@@ -82,7 +82,7 @@
    - [x] `cypress/fixtures/candidates.json` - 3 candidatos distribuidos en las etapas
 
 6. [x] ✅ Escribir spec principal: `cypress/e2e/position_spec.cy.js` (COMPLETADO 2026-01-19)
-   - **8 Tests Implementados:**
+   - **11 Tests Implementados:**
      - Test 1: Renderizado de columnas del flujo de entrevistas
      - Test 2: Renderizado de candidatos en columnas correctas
      - Test 3: Visualización de ratings (círculos verdes)
@@ -91,21 +91,24 @@
      - Test 6: Navegación - botón "Volver a Posiciones"
      - Test 7: Manejo de errores de API (500)
      - Test 8: Cancelación de drag (soltar fuera de zona válida)
+     - Test 9: Panel de detalles de candidato (apertura, visualización, cierre)
+     - Test 10: Verificación de data-testid en columnas Kanban
+     - Test 11: Verificación de data-testid en tarjetas de candidatos
    - **Estrategia:** Hybrid Mocking con `cy.intercept()` para fixtures
-   - **Selectores:** Usando `data-rbd-draggable-id` y `data-rbd-droppable-id` de react-beautiful-dnd
+   - **Selectores:** Usando `data-rbd-draggable-id`, `data-rbd-droppable-id` y `data-testid` personalizados
 
-7. [ ] 🔧 **TAREA ACTIVA:** Ejecutar tests y validar resultados
-   - Verificar que todos los tests pasan en modo gráfico (`npx cypress open`)
+7. [x] ✅ Añadir `data-testid` attributes a componentes (COMPLETADO 2026-01-19):
+   - [x] `StageColumn.js`: `data-testid="kanban-column-{stage.id}"`
+   - [x] `CandidateCard.js`: `data-testid="candidate-card-{candidate.id}"`
+   - [x] `CandidateDetails.js`: `data-testid="candidate-details-panel"`
+   - **Resultado:** Selectores robustos que no dependen de clases CSS o estructura DOM
+   - **Compatibilidad:** Los atributos no interfieren con react-beautiful-dnd
+
+8. [ ] 🔧 **TAREA ACTIVA:** Ejecutar tests y validar resultados
+   - Verificar que todos los 11 tests pasan en modo gráfico (`npx cypress open`)
    - Ejecutar en modo headless y revisar reportes
    - Ajustar selectores si es necesario basándose en resultados
-
-8. [ ] Añadir `data-testid` attributes a componentes (Opcional - Mejora Futura):
-   - `PositionDetails.js`: `data-testid="stage-column-{index}"`
-   - `CandidateCard.js`: `data-testid="candidate-card-{id}"`
-   - `CandidateDetails.js`: `data-testid="candidate-details-panel"`
-   - **Nota:** Los tests actuales usan selectores nativos de react-beautiful-dnd, por lo que esto es opcional
-
-9. [ ] Documentar resultados en walkthrough.md
+   - Documentar resultados en walkthrough.md
 
 ---
 
