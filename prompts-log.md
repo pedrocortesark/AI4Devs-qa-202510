@@ -151,3 +151,47 @@ Confírmame que has creado el archivo de configuración y que el plugin está im
 **Resumen de la Respuesta/Acción:**
 Instalados Cyress y dependencias para Drag & Drop. Configurado archivo de configuración y plugin importado correctamente. 
 ---
+
+## 003 - Generación de Fixtures Cypress
+**Fecha:** 2026-01-19
+**Prompt Original:**
+# Tarea: Generación de Fixtures para Cypress (Datos de Prueba)
+
+Actúa como QA Lead y Desarrollador Fullstack. Vamos a crear los datos estáticos (Mock Data) necesarios para que nuestros tests sean deterministas y no dependan de la base de datos en tiempo real.
+
+**CONTEXTO:**
+Estamos en la fase de "Preparación de Fixtures" definida en el roadmap. Necesitamos simular las respuestas de la API para la vista "Position Details" (Kanban).
+
+**ARCHIVOS A ANALIZAR (Para inferir la estructura JSON):**
+1.  Revisa `backend/prisma/schema.prisma` O BIEN los tipos en `frontend/src` (si existen) para entender la estructura exacta de:
+    - `InterviewFlow` / `InterviewStep` (Columnas del tablero).
+    - `Candidate` (Tarjetas).
+
+**PASOS A EJECUTAR:**
+
+1.  **Crear Fixture de Flujo (`frontend/cypress/fixtures/interviewFlow.json`):**
+    - Genera un JSON que simule la respuesta de `GET /positions/1/interviewFlow`.
+    - Debe contener al menos 3 pasos (ej: "Entrevista Inicial", "Prueba Técnica", "Oferta").
+    - Asegúrate de incluir los campos obligatorios que usa el frontend (probablemente `id`, `name` o `description`, y `orderIndex`).
+
+2.  **Crear Fixture de Candidatos (`frontend/cypress/fixtures/candidates.json`):**
+    - Genera un JSON que simule la respuesta de `GET /positions/1/candidates`.
+    - Crea 3 candidatos:
+      - Candidato A: En el paso 1 (Entrevista Inicial).
+      - Candidato B: En el paso 1 (Para probar el ordenamiento visual).
+      - Candidato C: En el paso 2 (Prueba Técnica).
+    - **CRÍTICO:** Los IDs de `currentInterviewStep` (o como se llame el campo de relación) DEBEN coincidir con los IDs que definiste en `interviewFlow.json`.
+
+3.  **Actualización de Memoria (Protocolo Obligatorio):**
+    - Edita `memory-bank/activeContext.md`:
+      - Marca "Preparación de Fixtures" como COMPLETADO.
+      - Establece "Escritura de Tests (Spec 1, 2 y 3)" como la nueva Tarea Activa.
+      - Añade una nota sobre qué archivos JSON se han creado.
+    - Edita `memory-bank/progress.md`: Marca el checkbox de "Preparación de Fixtures".
+
+**VERIFICACIÓN:**
+Antes de confirmar, verifica que los keys del JSON (ej: `fullName` vs `name`, `id` vs `_id`) coincidan con lo que el componente React `PositionDetails` espera renderizar.
+
+**Resumen de la Respuesta/Acción:**
+Analizado código frontend `PositionDetails.js` para inferir estructura de datos. Creados `interviewFlow.json` y `candidates.json` con datos mock coherentes con la lógica de filtrado del frontend (usando Nombres de steps en lugar de IDs para la propiedad `currentInterviewStep` como espera el frontend). Documentación actualizada.
+---

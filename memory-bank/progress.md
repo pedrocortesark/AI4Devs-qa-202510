@@ -70,11 +70,11 @@ Asegurar la calidad del sistema mediante tests End-to-End que validen flujos cr�
   - [x] Crear `cypress/support/commands.js` con comando custom `dragCandidateToStage`
   - [x] Añadir scripts `cy:open` y `cy:run` a `package.json`
 
-- [ ] 🔧 **Preparación de Fixtures** (PRÓXIMO PASO)
-  - [ ] `cypress/fixtures/interviewFlow.json` (mock de GET /positions/1/interviewFlow)
-  - [ ] `cypress/fixtures/candidates.json` (mock de GET /positions/1/candidates)
+- [x] ✅ **Preparación de Fixtures** (COMPLETADO 2026-01-19)
+  - [x] `cypress/fixtures/interviewFlow.json` (mock de GET /positions/1/interviewFlow)
+  - [x] `cypress/fixtures/candidates.json` (mock de GET /positions/1/candidates)
 
-- [ ] **Escritura de Tests**
+- [ ] 🔧 **Escritura de Tests** (TAREA ACTIVA)
   - [ ] **Spec 1: Navigation**
     - [ ] Test: Navegar desde Dashboard → Positions → Position Details
   - [ ] **Spec 2: Kanban Board Loading**

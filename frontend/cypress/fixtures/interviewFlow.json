@@ -1,0 +1,25 @@
+{
+    "interviewFlow": {
+        "positionName": "Desarrollador Fullstack",
+        "interviewFlow": {
+            "description": "Flujo de contratación estándar",
+            "interviewSteps": [
+                {
+                    "id": 1,
+                    "name": "Entrevista Inicial",
+                    "orderIndex": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Prueba Técnica",
+                    "orderIndex": 2
+                },
+                {
+                    "id": 3,
+                    "name": "Oferta",
+                    "orderIndex": 3
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,26 @@
+[
+    {
+        "candidateId": 101,
+        "fullName": "Carlos Garc\u00eda",
+        "email": "carlos.garcia@example.com",
+        "averageScore": 4,
+        "applicationId": 1,
+        "currentInterviewStep": "Entrevista Inicial"
+    },
+    {
+        "candidateId": 102,
+        "fullName": "Ana L\u00f3pez",
+        "email": "ana.lopez@example.com",
+        "averageScore": 3,
+        "applicationId": 2,
+        "currentInterviewStep": "Entrevista Inicial"
+    },
+    {
+        "candidateId": 103,
+        "fullName": "Beatriz M\u00e9ndez",
+        "email": "beatriz.mendez@example.com",
+        "averageScore": 5,
+        "applicationId": 3,
+        "currentInterviewStep": "Prueba T\u00e9cnica"
+    }
+]

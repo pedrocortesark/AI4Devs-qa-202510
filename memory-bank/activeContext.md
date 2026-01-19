@@ -77,11 +77,11 @@
    - Creado `cypress/support/commands.js` con comando custom `dragCandidateToStage`
    - Scripts añadidos a `package.json`: `cy:open`, `cy:run`
 
-5. [ ] 🔧 **TAREA ACTIVA:** Crear fixtures para mock de respuestas API
-   - [ ] `cypress/fixtures/interviewFlow.json`
-   - [ ] `cypress/fixtures/candidates.json`
+5. [x] ✅ **TAREA ACTIVA:** Crear fixtures para mock de respuestas API
+   - [x] `cypress/fixtures/interviewFlow.json`
+   - [x] `cypress/fixtures/candidates.json`
 
-6. [ ] Escribir spec principal: `cypress/e2e/position_spec.cy.js`
+6. [ ] 🔧 **TAREA ACTIVA:** Escribir spec principal: `cypress/e2e/position_spec.cy.js`
    - Test 1: Cargar tablero Kanban
    - Test 2: Mover candidato entre columnas
    - Test 3: Verificar llamada PUT al backend
