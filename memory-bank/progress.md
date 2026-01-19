@@ -76,14 +76,7 @@ Integrar la suite de pruebas E2E en el flujo de integración continua para asegu
 
 ---
 
----
-
 ## Próximas Fases (Roadmap)
-
-- [ ] Configurar GitHub Actions para ejecutar `cypress run` en cada PR
-- [ ] Generar reportes HTML de tests
-- [ ] Configurar Cypress Dashboard (opcional)
-- [ ] Tests en múltiples navegadores (Chrome, Firefox, Edge)
 
 ### Fase 7: Mejoras de UX (Q2 2026)
 - [ ] Toast notifications para feedback de acciones (react-toastify)
