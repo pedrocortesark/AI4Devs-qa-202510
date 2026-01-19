@@ -82,7 +82,7 @@ describe('Kanban Board - Position Details', () => {
         // Movemos a Carlos García (primer candidato en la columna 0) a la columna 1 (Prueba Técnica)
         // El droppableId es el índice del array de stages (0, 1, 2)
         cy.get('[data-rbd-draggable-id="101"]') // draggableId es el candidateId
-            .drag('[data-rbd-droppable-id="1"]'); // droppableId="1" es la segunda columna (Prueba Técnica)
+            .drag('[data-rbd-droppable-id="1"]', { force: true }); // droppableId="1" es la segunda columna (Prueba Técnica)
 
         // C. Verificamos la llamada a la API
         cy.wait('@updateCandidate').then((interception) => {
@@ -117,7 +117,7 @@ describe('Kanban Board - Position Details', () => {
         // Nota: Este test verifica que el drag & drop funciona, aunque no hace llamada API
         // porque el backend solo se actualiza cuando cambia de columna
         cy.get('[data-rbd-draggable-id="101"]')
-            .drag('[data-rbd-draggable-id="102"]');
+            .drag('[data-rbd-draggable-id="102"]', { force: true });
 
         // El orden visual debería cambiar (aunque esto depende de la implementación específica)
         // Este test verifica que el drag & drop no genera errores

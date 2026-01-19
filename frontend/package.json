@@ -31,7 +31,8 @@
     "test": "jest --config jest.config.js",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "test:e2e": "cypress run"
   },
   "eslintConfig": {
     "extends": [

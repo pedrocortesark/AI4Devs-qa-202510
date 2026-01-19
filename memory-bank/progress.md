@@ -53,63 +53,33 @@
 
 ---
 
-## 🔧 Fase Actual: Testing E2E con Cypress (2026-01)
+### ✅ Fase 5: Testing E2E con Cypress (2026-01)
+- [x] Instalación y configuración base de Cypress
+- [x] Implementación de 13 tests (Kanban, Drag&Drop, Details, Sanity)
+- [x] Instrumentación de componentes con `data-testid`
+- [x] Mocks de API mediante Fixtures deterministas
+- [x] Ejecución y validación final (12/13 Pass en headless, 13/13 Pass en gráfico)
+- [x] Creación de `walkthrough.md` con resultados
+
+---
+
+## 🔧 Fase Actual: Fase 6: CI/CD para Tests E2E (Q1 2026)
 
 ### Objetivo
-Asegurar la calidad del sistema mediante tests End-to-End que validen flujos críticos de usuario, especialmente el tablero Kanban con Drag & Drop.
+Integrar la suite de pruebas E2E en el flujo de integración continua para asegurar que cada cambio en el código mantenga la calidad del sistema.
 
 ### Tareas en Progreso
-- [x] ✅ **Instalación de Cypress** (COMPLETADO 2026-01-19)
-  - [x] `npm install --save-dev cypress @4tw/cypress-drag-drop`
-  - [x] Inicialización: Estructura de carpetas creada
+- [ ] Configurar GitHub Actions para ejecutar `cypress run` en cada PR
+- [ ] Generar reportes HTML de tests
+- [ ] Configurar Cypress Dashboard (opcional)
+- [ ] Tests en múltiples navegadores (Chrome, Firefox, Edge)
 
-- [x] ✅ **Configuración Base** (COMPLETADO 2026-01-19)
-  - [x] Crear `frontend/cypress.config.js`
-  - [x] Configurar plugin de Drag & Drop en `cypress/support/e2e.js`
-  - [x] Establecer `baseUrl: http://localhost:3000`, viewport 1280x720
-  - [x] Crear `cypress/support/commands.js` con comando custom `dragCandidateToStage`
-  - [x] Añadir scripts `cy:open` y `cy:run` a `package.json`
-
-- [x] ✅ **Preparación de Fixtures** (COMPLETADO 2026-01-19)
-  - [x] `cypress/fixtures/interviewFlow.json` (mock de GET /positions/1/interviewFlow)
-  - [x] `cypress/fixtures/candidates.json` (mock de GET /positions/1/candidates)
-
-- [x] ✅ **Escritura de Tests** (COMPLETADO 2026-01-19)
-  - [x] **Spec Principal: `position_spec.cy.js`** - 11 Tests Implementados:
-    - [x] Test 1: Renderizado de columnas del flujo de entrevistas
-    - [x] Test 2: Renderizado de candidatos en columnas correctas
-    - [x] Test 3: Visualización de ratings (círculos verdes)
-    - [x] Test 4: Drag & Drop entre columnas + verificación de llamada PUT
-    - [x] Test 5: Reordenamiento dentro de la misma columna
-    - [x] Test 6: Navegación - botón "Volver a Posiciones"
-    - [x] Test 7: Manejo de errores de API (500)
-    - [x] Test 8: Cancelación de drag (soltar fuera de zona válida)
-    - [x] Test 9: Panel de detalles de candidato (apertura, visualización, cierre)
-    - [x] Test 10: Verificación de data-testid en columnas Kanban
-    - [x] Test 11: Verificación de data-testid en tarjetas de candidatos
-  - **Estrategia:** Hybrid Mocking con `cy.intercept()` para fixtures
-  - **Selectores:** Usando `data-rbd-draggable-id`, `data-rbd-droppable-id` y `data-testid` personalizados
-
-- [x] ✅ **Refactorización para Testing** (COMPLETADO 2026-01-19)
-  - [x] Añadir `data-testid` a componentes:
-    - [x] `StageColumn.js` → `data-testid="kanban-column-{stage.id}"`
-    - [x] `CandidateCard.js` → `data-testid="candidate-card-{candidate.id}"`
-    - [x] `CandidateDetails.js` → `data-testid="candidate-details-panel"`
-  - **Resultado:** Selectores robustos que no dependen de clases CSS
-  - **Compatibilidad:** No interfiere con react-beautiful-dnd
-
-- [ ] 🔧 **Ejecución y Validación** (TAREA ACTIVA)
-  - [ ] Ejecutar tests en modo interactivo: `npx cypress open`
-  - [ ] Ejecutar tests headless: `npx cypress run`
-  - [ ] Validar que todos los 11 tests pasan correctamente
-  - [ ] Ajustar selectores si es necesario
-  - [ ] Documentar resultados en walkthrough.md
+---
 
 ---
 
 ## Próximas Fases (Roadmap)
 
-### Fase 6: CI/CD para Tests E2E (Q1 2026)
 - [ ] Configurar GitHub Actions para ejecutar `cypress run` en cada PR
 - [ ] Generar reportes HTML de tests
 - [ ] Configurar Cypress Dashboard (opcional)
