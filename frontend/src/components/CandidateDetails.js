@@ -7,13 +7,19 @@ const CandidateDetails = ({ candidate, onClose }) => {
         notes: '',
         score: 0
     });
+    const [error, setError] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         if (candidate) {
+            setError(null);
             fetch(`http://localhost:3010/candidates/${candidate.id}`)
                 .then(response => response.json())
                 .then(data => setCandidateDetails(data))
-                .catch(error => console.error('Error fetching candidate details:', error));
+                .catch(error => {
+                    console.error('Error fetching candidate details:', error);
+                    setError('Error al cargar detalles del candidato.');
+                });
         }
     }, [candidate]);
 
@@ -34,6 +40,8 @@ const CandidateDetails = ({ candidate, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setError(null);
+        setIsSubmitting(true);
         fetch(`http://localhost:3010/candidates/${candidate.id}/interviews`, {
             method: 'POST',
             headers: {
@@ -41,7 +49,12 @@ const CandidateDetails = ({ candidate, onClose }) => {
             },
             body: JSON.stringify(newInterview)
         })
-            .then(response => response.json())
+            .then(async response => {
+                if (!response.ok) {
+                    throw new Error('Fallback error message if no structured error from API');
+                }
+                return response.json();
+            })
             .then(data => {
                 // Update the candidate details with the new interview
                 setCandidateDetails(prevDetails => ({
@@ -61,9 +74,16 @@ const CandidateDetails = ({ candidate, onClose }) => {
                     notes: '',
                     score: 0
                 });
+                // Close the panel ONLY on success
+                onClose();
             })
-            .catch(error => console.error('Error creating interview:', error))
-            .finally(() => onClose())
+            .catch(error => {
+                console.error('Error creating interview:', error);
+                setError('Error al registrar la entrevista. Por favor, inténtelo de nuevo.');
+            })
+            .finally(() => {
+                setIsSubmitting(false);
+            });
     };
 
     return (
@@ -72,6 +92,7 @@ const CandidateDetails = ({ candidate, onClose }) => {
                 <Offcanvas.Title>Detalles del Candidato</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+                {error && <div className="alert alert-danger">{error}</div>}
                 {candidateDetails ? (
                     <>
                         <h5>{candidateDetails.firstName} {candidateDetails.lastName}</h5>
@@ -125,6 +146,7 @@ const CandidateDetails = ({ candidate, onClose }) => {
                                     name="notes"
                                     value={newInterview.notes}
                                     onChange={handleInputChange}
+                                    disabled={isSubmitting}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formScore">
@@ -134,23 +156,23 @@ const CandidateDetails = ({ candidate, onClose }) => {
                                         <span
                                             key={score}
                                             style={{
-                                                cursor: 'pointer',
+                                                cursor: isSubmitting ? 'default' : 'pointer',
                                                 color: newInterview.score >= score ? 'gold' : 'gray'
                                             }}
-                                            onClick={() => handleScoreChange(score)}
+                                            onClick={() => !isSubmitting && handleScoreChange(score)}
                                         >
                                             ★
                                         </span>
                                     ))}
                                 </div>
                             </Form.Group>
-                            <Button variant="primary" type="submit">
-                                Registrar
+                            <Button variant="primary" type="submit" disabled={isSubmitting}>
+                                {isSubmitting ? 'Registrando...' : 'Registrar'}
                             </Button>
                         </Form>
                     </>
                 ) : (
-                    <p>Cargando...</p>
+                    !error && <p>Cargando...</p>
                 )}
             </Offcanvas.Body>
         </Offcanvas>

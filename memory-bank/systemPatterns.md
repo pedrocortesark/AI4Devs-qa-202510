@@ -140,12 +140,11 @@ backend/src/
 
 ---
 
-## Patrones de Testing (A Implementar)
+## Patrones de Testing
 
-### Arquitectura de Testing E2E con Cypress
-**Framework:** Cypress 13.x (a instalar)
+**Framework:** Cypress 13.x (implementado)
 
-**Estructura Propuesta:**
+**Estructura Actual:**
 ```text
 frontend/
 ├── cypress/
@@ -158,11 +157,11 @@ frontend/
 │   └── cypress.config.js          # Configuración
 ```
 
-**Plugin Crítico para Drag & Drop:**
-- **@4tw/cypress-drag-drop** o **@percy/cypress** (para simular eventos DnD)
+**Plugins Utilizados:**
+- **@4tw/cypress-drag-drop** (incorporado para simular eventos DnD)
 
-**Selectores Recomendados:**
-- **data-testid:** Añadir atributos `data-testid` a elementos críticos (ej: `data-testid="candidate-card-123"`)
+**Estrategia de Selectores:**
+- **data-testid:** Instrumentado con atributos `data-testid` en elementos críticos (ej: `data-testid="candidate-card-123"`)
 - **Evitar:** Selectores basados en clases Bootstrap (frágiles)
 
 **Patrón de Tests:**

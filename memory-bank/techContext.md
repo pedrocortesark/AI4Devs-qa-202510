@@ -64,13 +64,15 @@
 | **PostgreSQL** | latest (Docker image) | Via docker-compose |
 | **Prisma Schema** | - | `backend/prisma/schema.prisma` |
 
-**Conexión (Hardcoded en schema.prisma):**
+**Conexión (Configurable vía .env):**
 ```prisma
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://LTIdbUser:D1ymf8wyQEGthFR1E9xhCq@localhost:5432/LTIdb"
+  url      = env("DATABASE_URL")
 }
 ```
+> [!NOTE]
+> La URL de conexión real se encuentra en el archivo `.env` de la raíz, siguiendo el formato: `postgresql://<DB_USER>:<DB_PASSWORD>@localhost:5432/<DB_NAME>`
 
 **Docker Compose:**
 ```yaml
@@ -78,9 +80,9 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_USER: LTIdbUser
-      POSTGRES_PASSWORD: D1ymf8wyQEGthFR1E9xhCq
-      POSTGRES_DB: LTIdb
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
 ```
@@ -97,7 +99,7 @@ cd backend && npx prisma migrate deploy
 cd backend && node dist/prisma/seed.js  # (seed.ts compilado)
 
 # Verificar datos
-docker-compose exec db psql -U LTIdbUser -d LTIdb -c 'SELECT * FROM "Position";'
+docker-compose exec db psql -U ${DB_USER} -d ${DB_NAME} -c 'SELECT * FROM "Position";'
 ```
 
 ---
@@ -320,8 +322,9 @@ npx cypress run  # Modo headless (CI)
 ---
 
 ## Próximos Pasos Técnicos
-- [ ] Crear `frontend/cypress.config.js`
-- [ ] Configurar plugin `@4tw/cypress-drag-drop`
-- [ ] Escribir primer test: `cypress/e2e/position_spec.cy.js`
-- [ ] Añadir `data-testid` attributes a componentes
-- [ ] Configurar fixtures para mock de API responses
+- [x] Crear `frontend/cypress.config.js` (COMPLETADO)
+- [x] Configurar plugin `@4tw/cypress-drag-drop` (COMPLETADO)
+- [x] Escribir primer test: `cypress/e2e/position_spec.cy.js` (COMPLETADO)
+- [x] Añadir `data-testid` attributes a componentes (COMPLETADO)
+- [x] Configurar fixtures para mock de API responses (COMPLETADO)
+- [ ] Configurar CI/CD para ejecución automática

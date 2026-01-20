@@ -115,7 +115,7 @@
 
 8. [x] ✅ Ejecutar tests y validar resultados (COMPLETADO 2026-01-19)
    - [x] Verificado en modo gráfico (`npx cypress open`) - 13/13 Pass
-   - [x] Ejecutado en modo headless (`npm run test:e2e`) - 12/13 Pass (Test 4 flackiness en Electron)
+   - [x] Ejecutado en modo headless (`npm run test:e2e`) - 12/13 Pass (Test 4 flakiness en Electron)
    - [x] Documentado en `walkthrough.md`
 
 ---
