@@ -31,4 +31,4 @@ Crear un sistema integral que permita:
 ## Métricas de Éxito (Testing)
 1. **Cobertura E2E:** Al menos 80% de los flujos críticos (Kanban Drag&Drop, navegación, formularios)
 2. **Tiempo de ejecución:** Suite de tests < 3 minutos
-3. **Estabilidad:** 0 tests flaky (intermitentes) en ambiente controlado
+3. **Estabilidad:** 0 tests flaky en ambiente controlado (Nota: Se reconoce flakiness en Test 4 bajo Electron/Headless, documentado en activeContext.md)

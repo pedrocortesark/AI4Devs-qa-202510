@@ -1,0 +1,38 @@
+{
+    "id": 101,
+    "firstName": "Carlos",
+    "lastName": "García",
+    "email": "carlos.garcia@example.com",
+    "phone": "+34 600 123 456",
+    "address": "Madrid, España",
+    "educations": [
+        {
+            "id": 1,
+            "institution": "Universidad Politécnica de Madrid",
+            "title": "Ingeniería Informática",
+            "startDate": "2015-09-01",
+            "endDate": "2019-06-30"
+        }
+    ],
+    "workExperiences": [
+        {
+            "id": 1,
+            "company": "Tech Solutions S.L.",
+            "position": "Desarrollador Full Stack",
+            "description": "Desarrollo de aplicaciones web con React y Node.js",
+            "startDate": "2019-07-01",
+            "endDate": "2023-12-31"
+        }
+    ],
+    "resumes": [],
+    "applications": [
+        {
+            "id": 1,
+            "position": {
+                "title": "Desarrollador Fullstack"
+            },
+            "applicationDate": "2024-01-15",
+            "interviews": []
+        }
+    ]
+}

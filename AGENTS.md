@@ -52,8 +52,8 @@ NO marques una tarea como completada hasta haber verificado estos 3 puntos:
     - Si añadiste un nuevo módulo, carpeta o servicio -> Actualiza `memory-bank/systemPatterns.md`.
     - Si añadiste una librería o dependencia -> Actualiza `memory-bank/techContext.md`.
 
-2.  **¿Tomaste una Decisión Técnica?**
-    - Si elegiste una herramienta, patrón o descartaste una opción -> Regístralo en `memory-bank/decisions.md`.
+2.  **¿Tomaste una decisión técnica?**
+    - Si elegiste una herramienta, patrón o descartaste una opción -> Regístralo en `memory-bank/techContext.md`.
 
 3.  **¿Cambió el Alcance (Scope)?**
     - Si lo que construiste difiere de lo planeado originalmente -> Actualiza `memory-bank/projectbrief.md` y `activeContext.md`.

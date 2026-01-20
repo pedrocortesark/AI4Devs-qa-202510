@@ -146,55 +146,14 @@
 
 ---
 
-## Bloqueos y Dependencias
-
-### ⚠️ Bloqueos Actuales
-**Ninguno.** Backend y frontend funcionan correctamente.
-
-### 🔗 Dependencias para Continuar
-1. **Cypress no instalado:** Requiere `npm install --save-dev cypress @4tw/cypress-drag-drop`
-2. **Sin `data-testid` attributes:** Componentes carecen de selectores estables para tests
-3. **Sin fixtures:** Necesita datos mock para tests sin dependencia de backend
+---
 
 ---
 
-## Próximos Pasos Inmediatos
-
-### Paso 1: Configurar Cypress (Hoy)
-```bash
-cd frontend
-npm install --save-dev cypress@^13.6.0 @4tw/cypress-drag-drop@^2.2.5
-npx cypress open
-```
-
-### Paso 2: Crear Estructura de Tests (Hoy)
-```
-frontend/cypress/
-├── e2e/
-│   └── position_spec.cy.js
-├── fixtures/
-│   ├── interviewFlow.json
-│   └── candidates.json
-└── support/
-    └── e2e.js  # Import plugin drag-drop
-```
-
-### Paso 3: Primer Test (Hoy)
-Escribir test básico de carga de tablero:
-```javascript
-describe('Position Kanban Board', () => {
-  it('should load position details and display stages', () => {
-    cy.visit('/positions/1');
-    cy.contains('Senior Full-Stack Engineer').should('be.visible');
-    cy.get('[data-testid="stage-column-0"]').should('contain', 'Initial Screening');
-  });
-});
-```
-
-### Paso 4: Añadir Selectores (Mañana)
-Modificar componentes para incluir `data-testid`:
-- `PositionDetails.js`: Añadir a `<StageColumn>` wrapper
-- `CandidateCard.js`: Añadir al `<Card>` principal
+## Próximos Pasos (Futuras Fases)
+- **CI/CD Integration**: Configurar GitHub Actions para ejecución automática de tests.
+- **Additional Form Tests**: Ampliar cobertura para el formulario de añadir candidato.
+- **Coverage Improvements**: Incrementar la cobertura de tests en componentes menos críticos.
 
 ---
 

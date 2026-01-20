@@ -149,7 +149,7 @@ Dejar el entorno de Cypress listo para escribir pruebas, incluyendo el soporte p
 Confírmame que has creado el archivo de configuración y que el plugin está importado correctamente antes de terminar.
 
 **Resumen de la Respuesta/Acción:**
-Instalados Cyress y dependencias para Drag & Drop. Configurado archivo de configuración y plugin importado correctamente. 
+Instalados Cypress y dependencias para Drag & Drop. Configurado archivo de configuración y plugin importado correctamente. 
 ---
 
 ## 003 - Generación de Fixtures Cypress

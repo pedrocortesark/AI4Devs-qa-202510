@@ -158,14 +158,14 @@ Cypress.Commands.add('dragCandidateToStage', (candidateId, stageIndex) => {
 ```
 
 **Estructura de Carpetas Creada:**
-```
+```text
 frontend/cypress/
 ├── e2e/              # Tests E2E (vacío, listo para specs)
 ├── fixtures/         # Datos mock (vacío, listo para JSON)
 └── support/
     ├── e2e.js        # ✅ Plugin drag-drop configurado
     └── commands.js   # ✅ Custom commands definidos
-
+```
 
 ---
 

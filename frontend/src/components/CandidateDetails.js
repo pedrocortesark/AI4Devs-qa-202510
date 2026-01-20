@@ -61,8 +61,6 @@ const CandidateDetails = ({ candidate, onClose }) => {
                     notes: '',
                     score: 0
                 });
-                // Close the panel
-                onClose();
             })
             .catch(error => console.error('Error creating interview:', error))
             .finally(() => onClose())

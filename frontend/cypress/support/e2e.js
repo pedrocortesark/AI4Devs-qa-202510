@@ -5,10 +5,7 @@
 // ***********************************************************
 
 // Import the Drag & Drop plugin for react-beautiful-dnd support
-require('@4tw/cypress-drag-drop');
+import '@4tw/cypress-drag-drop';
 
 // Import commands.js using ES2015 syntax:
 import './commands';
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')

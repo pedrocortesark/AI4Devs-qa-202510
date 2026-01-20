@@ -32,21 +32,15 @@ describe('Kanban Board - Position Details', () => {
         cy.contains('Beatriz Méndez').should('be.visible');
 
         // Verificamos que Carlos García y Ana López están en "Entrevista Inicial"
-        cy.contains('Entrevista Inicial')
-            .parent()
-            .parent()
-            .within(() => {
-                cy.contains('Carlos García').should('exist');
-                cy.contains('Ana López').should('exist');
-            });
+        cy.get('[data-testid="kanban-column-1"]').within(() => {
+            cy.contains('Carlos García').should('exist');
+            cy.contains('Ana López').should('exist');
+        });
 
         // Verificamos que Beatriz Méndez está en "Prueba Técnica"
-        cy.contains('Prueba Técnica')
-            .parent()
-            .parent()
-            .within(() => {
-                cy.contains('Beatriz Méndez').should('exist');
-            });
+        cy.get('[data-testid="kanban-column-2"]').within(() => {
+            cy.contains('Beatriz Méndez').should('exist');
+        });
     });
 
     // TEST 3: Visualización de Rating - Verificar que los ratings se muestran correctamente
@@ -95,12 +89,9 @@ describe('Kanban Board - Position Details', () => {
         });
 
         // D. Verificamos que visualmente el candidato se movió a la nueva columna
-        cy.contains('Prueba Técnica')
-            .parent()
-            .parent()
-            .within(() => {
-                cy.contains('Carlos García').should('exist');
-            });
+        cy.get('[data-testid="kanban-column-2"]').within(() => {
+            cy.contains('Carlos García').should('exist');
+        });
     });
 
     // TEST 5: Drag & Drop - Mover candidato dentro de la misma columna (reordenamiento)
@@ -114,13 +105,14 @@ describe('Kanban Board - Position Details', () => {
             .should('contain', 'Carlos García');
 
         // Movemos a Carlos García (índice 0) a la posición de Ana López (índice 1)
-        // Nota: Este test verifica que el drag & drop funciona, aunque no hace llamada API
-        // porque el backend solo se actualiza cuando cambia de columna
         cy.get('[data-rbd-draggable-id="101"]')
             .drag('[data-rbd-draggable-id="102"]', { force: true });
 
-        // El orden visual debería cambiar (aunque esto depende de la implementación específica)
-        // Este test verifica que el drag & drop no genera errores
+        // Verificamos que Ana López es ahora la primera en la columna
+        cy.get('[data-testid="kanban-column-1"]')
+            .find('[data-testid^="candidate-card-"]')
+            .first()
+            .should('contain', 'Ana López');
     });
 
     // TEST 6: Navegación - Botón de volver a posiciones
@@ -152,8 +144,7 @@ describe('Kanban Board - Position Details', () => {
         cy.wait(['@getFlowError', '@getCandidatesError']);
 
         // Verificamos que la página no muestra candidatos (manejo graceful del error)
-        // Nota: Esto depende de cómo el frontend maneje los errores
-        // En este caso, simplemente verificamos que no crashea
+        cy.get('[data-testid^="candidate-card-"]').should('not.exist');
         cy.get('body').should('exist');
     });
 
@@ -171,56 +162,15 @@ describe('Kanban Board - Position Details', () => {
         cy.get('@updateCandidate.all').should('have.length', 0);
 
         // Verificamos que el candidato sigue en su columna original
-        cy.contains('Entrevista Inicial')
-            .parent()
-            .parent()
-            .within(() => {
-                cy.contains('Carlos García').should('exist');
-            });
+        cy.get('[data-testid="kanban-column-1"]').within(() => {
+            cy.contains('Carlos García').should('exist');
+        });
     });
 
     // TEST 9: Candidate Details Panel - Abrir y verificar detalles del candidato
     it('Abre el panel de detalles al hacer clic en un candidato', () => {
-        // A. Interceptamos la llamada de detalles del candidato
-        cy.intercept('GET', '**/candidates/101', {
-            statusCode: 200,
-            body: {
-                id: 101,
-                firstName: 'Carlos',
-                lastName: 'García',
-                email: 'carlos.garcia@example.com',
-                phone: '+34 600 123 456',
-                address: 'Madrid, España',
-                educations: [
-                    {
-                        id: 1,
-                        institution: 'Universidad Politécnica de Madrid',
-                        title: 'Ingeniería Informática',
-                        startDate: '2015-09-01',
-                        endDate: '2019-06-30'
-                    }
-                ],
-                workExperiences: [
-                    {
-                        id: 1,
-                        company: 'Tech Solutions S.L.',
-                        position: 'Desarrollador Full Stack',
-                        description: 'Desarrollo de aplicaciones web con React y Node.js',
-                        startDate: '2019-07-01',
-                        endDate: '2023-12-31'
-                    }
-                ],
-                resumes: [],
-                applications: [
-                    {
-                        id: 1,
-                        position: { title: 'Desarrollador Fullstack' },
-                        applicationDate: '2024-01-15',
-                        interviews: []
-                    }
-                ]
-            }
-        }).as('getCandidateDetails');
+        // A. Interceptamos la llamada de detalles del candidato usando fixture
+        cy.intercept('GET', '**/candidates/101', { fixture: 'candidateDetails.json' }).as('getCandidateDetails');
 
         // B. Hacemos clic en la tarjeta del candidato usando data-testid
         cy.get('[data-testid="candidate-card-101"]').click();

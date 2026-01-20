@@ -51,7 +51,7 @@
 ### Patrón de Capas
 Estructura basada en **Clean Architecture**:
 
-```
+```text
 backend/src/
 ├── presentation/       # Controllers (Express request handlers)
 │   └── controllers/
@@ -146,7 +146,7 @@ backend/src/
 **Framework:** Cypress 13.x (a instalar)
 
 **Estructura Propuesta:**
-```
+```text
 frontend/
 ├── cypress/
 │   ├── e2e/
